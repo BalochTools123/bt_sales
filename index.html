@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sales Record Viewer</title>
+  <title>Sales Dashboard</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
   <style>
     * {
@@ -13,23 +13,65 @@
     body {
       margin: 0;
       padding: 2rem;
-      background-color: #f4f6f8;
+      background: linear-gradient(135deg, #e0eafc, #cfdef3);
       color: #333;
+      animation: fadeIn 1s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    header img {
+      height: 80px;
+      border-radius: 12px;
+      animation: fadeIn 1.5s ease-in-out;
     }
     h1 {
-      text-align: center;
-      margin-bottom: 1rem;
+      margin-top: 0.5rem;
+      font-size: 2rem;
+      color: #007bff;
+    }
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    input, button {
+      padding: 0.6rem 1rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+    button {
+      background-color: #007bff;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    button:hover {
+      background-color: #0056b3;
     }
     .summary {
       text-align: center;
+      font-size: 1.2rem;
       margin-bottom: 2rem;
-      font-size: 1.1rem;
+      font-weight: 600;
     }
     table {
       width: 100%;
       border-collapse: collapse;
       background-color: #fff;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      margin-bottom: 2rem;
+      animation: fadeIn 0.8s ease-in-out;
+      border-radius: 8px;
+      overflow: hidden;
     }
     th, td {
       padding: 0.75rem;
@@ -46,7 +88,18 @@
   </style>
 </head>
 <body>
-  <h1>Sales Record Report</h1>
+  <header>
+    <img src="logo.jpg" alt="Logo">
+    <h1>Sales Dashboard</h1>
+  </header>
+  <div class="controls">
+    <input type="date" id="fromDate">
+    <input type="date" id="toDate">
+    <input type="text" id="search" placeholder="Search products..." oninput="filterData()">
+    <button onclick="filterData()">Apply Filter</button>
+    <button onclick="showTodayProfit()">Today's Profit</button>
+    <button onclick="triggerPrint()">Export to PDF</button>
+  </div>
   <div class="summary" id="summary">Loading summary...</div>
   <table>
     <thead>
@@ -67,46 +120,75 @@
   </table>
 
   <script>
-    const jsonUrl = "https://balochtools123.github.io/bt_sales/sales.json"; // 👈 Use GitHub Pages JSON
-    
+    const jsonUrl = "https://balochtools123.github.io/bt_sales/sales.json";
+    let allData = [];
 
     async function loadSalesData() {
       try {
         const res = await fetch(jsonUrl);
-        if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
-        const data = await res.json();
-
-        const tbody = document.getElementById('table-body');
-        tbody.innerHTML = '';
-
-        let totalProfit = 0;
-        let totalEarnings = 0;
-
-        data.forEach(record => {
-          const tr = document.createElement('tr');
-          totalProfit += Number(record.profit);
-          totalEarnings += Number(record.total_price);
-
-          tr.innerHTML = `
-            <td>${record.id}</td>
-            <td>${record.product_name}</td>
-            <td>${record.quantity}</td>
-            <td>${record.sale_price}</td>
-            <td>${record.unit_price}</td>
-            <td>${record.total_price}</td>
-            <td>${record.profit}</td>
-            <td>${record.sale_date}</td>
-          `;
-          tbody.appendChild(tr);
-        });
-
-        document.getElementById('summary').innerText = `Total Earnings: Rs. ${totalEarnings.toFixed(2)} | Total Profit: Rs. ${totalProfit.toFixed(2)}`;
-
+        allData = await res.json();
+        renderTable(allData);
       } catch (err) {
-        document.getElementById('table-body').innerHTML = `<tr><td colspan="8">Failed to load data.</td></tr>`;
-        document.getElementById('summary').innerText = 'Error fetching data. Check JSON URL or internet connection.';
-        console.error('Error loading sales data:', err);
+        document.getElementById('summary').innerText = 'Error loading data.';
+        console.error(err);
       }
+    }
+
+    function renderTable(data) {
+      const tbody = document.getElementById('table-body');
+      tbody.innerHTML = '';
+
+      let totalProfit = 0;
+      let totalEarnings = 0;
+
+      data.forEach(record => {
+        totalProfit += Number(record.profit);
+        totalEarnings += Number(record.total_price);
+
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${record.id}</td>
+          <td>${record.product_name}</td>
+          <td>${record.quantity}</td>
+          <td>${record.sale_price}</td>
+          <td>${record.unit_price}</td>
+          <td>${record.total_price}</td>
+          <td>${record.profit}</td>
+          <td>${record.sale_date}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+
+      document.getElementById('summary').innerText = `Total Earnings: Rs. ${totalEarnings.toFixed(2)} | Total Profit: Rs. ${totalProfit.toFixed(2)}`;
+    }
+
+    function filterData() {
+      const from = new Date(document.getElementById('fromDate').value);
+      const to = new Date(document.getElementById('toDate').value);
+      const search = document.getElementById('search').value.toLowerCase();
+
+      const filtered = allData.filter(r => {
+        const saleDate = new Date(r.sale_date);
+        return (!isNaN(from) ? saleDate >= from : true)
+          && (!isNaN(to) ? saleDate <= to : true)
+          && r.product_name.toLowerCase().includes(search);
+      });
+
+      renderTable(filtered);
+    }
+
+    function showTodayProfit() {
+      const todayStr = new Date().toISOString().split('T')[0];
+      const todayData = allData.filter(r => r.sale_date.startsWith(todayStr));
+
+      let profit = todayData.reduce((sum, r) => sum + Number(r.profit), 0);
+      let earnings = todayData.reduce((sum, r) => sum + Number(r.total_price), 0);
+
+      document.getElementById('summary').innerText = `Total Earnings: Rs. ${earnings.toFixed(2)} | Total Profit: Rs. ${profit.toFixed(2)}`;
+    }
+
+    function triggerPrint() {
+      window.print();
     }
 
     loadSalesData();

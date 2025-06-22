@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sales Record Viewer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+    body {
+      margin: 0;
+      padding: 2rem;
+      background-color: #f4f6f8;
+      color: #333;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+    .summary {
+      text-align: center;
+      margin-bottom: 2rem;
+      font-size: 1.1rem;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: #fff;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    th, td {
+      padding: 0.75rem;
+      border: 1px solid #ddd;
+      text-align: center;
+    }
+    th {
+      background-color: #007bff;
+      color: white;
+    }
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+  </style>
+</head>
+<body>
+  <h1>Sales Record Report</h1>
+  <div class="summary" id="summary">Loading summary...</div>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Product Name</th>
+        <th>Quantity</th>
+        <th>Sale Price</th>
+        <th>Unit Price</th>
+        <th>Total Price</th>
+        <th>Profit</th>
+        <th>Sale Date</th>
+      </tr>
+    </thead>
+    <tbody id="table-body">
+      <tr><td colspan="8">Loading data...</td></tr>
+    </tbody>
+  </table>
+
+  <script>
+    const jsonUrl = "https://github.com/BalochTools123/bt_sales/blob/9a988bd97f7ab60cee01a8d84a45559d509e8b06/sales.json"; // 👈 Use GitHub Pages JSON
+    
+
+    async function loadSalesData() {
+      try {
+        const res = await fetch(jsonUrl);
+        if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+        const data = await res.json();
+
+        const tbody = document.getElementById('table-body');
+        tbody.innerHTML = '';
+
+        let totalProfit = 0;
+        let totalEarnings = 0;
+
+        data.forEach(record => {
+          const tr = document.createElement('tr');
+          totalProfit += Number(record.profit);
+          totalEarnings += Number(record.total_price);
+
+          tr.innerHTML = `
+            <td>${record.id}</td>
+            <td>${record.product_name}</td>
+            <td>${record.quantity}</td>
+            <td>${record.sale_price}</td>
+            <td>${record.unit_price}</td>
+            <td>${record.total_price}</td>
+            <td>${record.profit}</td>
+            <td>${record.sale_date}</td>
+          `;
+          tbody.appendChild(tr);
+        });
+
+        document.getElementById('summary').innerText = `Total Earnings: Rs. ${totalEarnings.toFixed(2)} | Total Profit: Rs. ${totalProfit.toFixed(2)}`;
+
+      } catch (err) {
+        document.getElementById('table-body').innerHTML = `<tr><td colspan="8">Failed to load data.</td></tr>`;
+        document.getElementById('summary').innerText = 'Error fetching data. Check JSON URL or internet connection.';
+        console.error('Error loading sales data:', err);
+      }
+    }
+
+    loadSalesData();
+  </script>
+</body>
+</html>

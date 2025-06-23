@@ -258,5 +258,15 @@
     "total_price": 18.0,
     "profit": 5.0,
     "sale_date": "2025-06-23 16:05:50"
+  },
+  {
+    "id": 39,
+    "product_name": "HAMMER RUBBER SMALL CHINA",
+    "quantity": 1,
+    "sale_price": 600.0,
+    "unit_price": 600.0,
+    "total_price": 600.0,
+    "profit": 140.0,
+    "sale_date": "2025-06-23 16:23:54"
   }
 ]

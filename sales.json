@@ -378,5 +378,15 @@
     "total_price": 12350.0,
     "profit": 1900.0,
     "sale_date": "2025-06-23 18:36:53"
+  },
+  {
+    "id": 55,
+    "product_name": "LR METER",
+    "quantity": 1,
+    "sale_price": 650.0,
+    "unit_price": 650.0,
+    "total_price": 650.0,
+    "profit": 100.0,
+    "sale_date": "2025-06-23 18:40:44"
   }
 ]

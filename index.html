@@ -139,7 +139,8 @@
   </table>
 
   <script>
-    const jsonUrl = "https://balochtools123.github.io/bt_sales/sales.json";
+    const jsonUrl = "https://balochtools123.github.io/bt_sales/sales.json?nocache=" + new Date().getTime();
+
     let allData = [];
 
     async function loadSalesData() {

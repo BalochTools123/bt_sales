@@ -93738,5 +93738,15 @@
     "total_price": 2700.0,
     "profit": 540.0,
     "sale_date": "2025-06-26 16:38:17"
+  },
+  {
+    "id": 9926,
+    "product_name": "GLASS WARMA 42mm",
+    "quantity": 1,
+    "sale_price": 750.0,
+    "unit_price": 770.0,
+    "total_price": 750.0,
+    "profit": 100.0,
+    "sale_date": "2025-06-26 17:02:53"
   }
 ]

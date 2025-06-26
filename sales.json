@@ -93728,5 +93728,15 @@
     "total_price": 50.0,
     "profit": 10.0,
     "sale_date": "2025-06-26 16:23:22"
+  },
+  {
+    "id": 9925,
+    "product_name": "RAWL BOLT 3/8 3 SUTR",
+    "quantity": 60,
+    "sale_price": 45.0,
+    "unit_price": 45.0,
+    "total_price": 2700.0,
+    "profit": 540.0,
+    "sale_date": "2025-06-26 16:38:17"
   }
 ]

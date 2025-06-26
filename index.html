@@ -140,13 +140,13 @@
 
   <script>
     const jsonUrl = "https://balochtools123.github.io/bt_sales/sales.json?nocache=" + new Date().getTime();
-
     let allData = [];
 
     async function loadSalesData() {
       try {
         const res = await fetch(jsonUrl);
         allData = await res.json();
+        allData.sort((a, b) => new Date(b.sale_date) - new Date(a.sale_date));  // Sort latest first
         renderTable(allData);
       } catch (err) {
         document.getElementById('summary').innerText = 'Error loading data.';
@@ -194,17 +194,22 @@
           && r.product_name.toLowerCase().includes(search);
       });
 
+      filtered.sort((a, b) => new Date(b.sale_date) - new Date(a.sale_date));  // Sort filtered data
       renderTable(filtered);
     }
 
     function showTodayProfit() {
       const todayStr = new Date().toISOString().split('T')[0];
+
       const todayData = allData.filter(r => r.sale_date.startsWith(todayStr));
+      todayData.sort((a, b) => new Date(b.sale_date) - new Date(a.sale_date));  // Sort today data
 
       let profit = todayData.reduce((sum, r) => sum + Number(r.profit), 0);
       let earnings = todayData.reduce((sum, r) => sum + Number(r.total_price), 0);
 
-      document.getElementById('summary').innerText = `Total Earnings: Rs. ${earnings.toFixed(2)} | Total Profit: Rs. ${profit.toFixed(2)}`;
+      document.getElementById('summary').innerText = `Today's Earnings: Rs. ${earnings.toFixed(2)} | Today's Profit: Rs. ${profit.toFixed(2)} | Total Records: ${todayData.length}`;
+
+      renderTable(todayData);
     }
 
     function triggerPrint() {

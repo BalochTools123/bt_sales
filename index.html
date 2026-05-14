@@ -505,33 +505,38 @@
     }
 
     function updateStatistics(stats) {
-      // 1. Get Local "Today" in YYYY-MM-DD format
-      const todayStr = new Date().toISOString().split('T')[0]; 
+  // 1. Get today's date in YOUR local time (YYYY-MM-DD)
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = String(now.getMonth() + 1).padStart(2, '0');
+  const day = String(now.getDate()).padStart(2, '0');
+  const todayStr = `${year}-${month}-${day}`; 
 
-      let liveTodaySales = 0;
-      let liveTodayProfit = 0;
-      let liveTodayItems = 0;
+  let liveTodaySales = 0;
+  let liveTodayProfit = 0;
+  let liveTodayItems = 0;
 
-      // 2. Scan ALL records for Today's date
-      originalSalesRecords.forEach(r => {
-        // Extract only the date part "2026-05-14" from "2026-05-14 21:10:08"
-        const recordDate = r.sale_date.split(' ')[0]; 
-        if (recordDate === todayStr) {
-          liveTodaySales += (r.total_price || 0);
-          liveTodayProfit += (r.profit || 0);
-          liveTodayItems += (r.quantity || 0);
-        }
-      });
-
-      // 3. Update Today Badges
-      document.getElementById('todaySales').textContent = formatCurrency(liveTodaySales);
-      document.getElementById('todayProfit').textContent = formatCurrency(liveTodayProfit);
-      document.getElementById('todayItems').textContent = liveTodayItems.toLocaleString();
-
-      // 4. Update Period/Filter Badges
-      document.getElementById('totalSales').textContent = formatCurrency(stats.sales);
-      document.getElementById('totalProfit').textContent = formatCurrency(stats.profit);
+  // 2. Scan ALL records
+  originalSalesRecords.forEach(r => {
+    // Split "2026-05-14 21:10:08" to get just "2026-05-14"
+    const recordDateOnly = r.sale_date.split(' ')[0]; 
+    
+    if (recordDateOnly === todayStr) {
+      liveTodaySales += (Number(r.total_price) || 0);
+      liveTodayProfit += (Number(r.profit) || 0);
+      liveTodayItems += (Number(r.quantity) || 0);
     }
+  });
+
+  // 3. Update Today Badges (The exact count)
+  document.getElementById('todaySales').textContent = formatCurrency(liveTodaySales);
+  document.getElementById('todayProfit').textContent = formatCurrency(liveTodayProfit);
+  document.getElementById('todayItems').textContent = liveTodayItems.toLocaleString();
+
+  // 4. Update Period/Filter Badges (What you see in the table)
+  document.getElementById('totalSales').textContent = formatCurrency(stats.sales);
+  document.getElementById('totalProfit').textContent = formatCurrency(stats.profit);
+}
 
     function updateUserStats(records) {
       const users = {};

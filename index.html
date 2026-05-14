@@ -84,29 +84,14 @@
       font-size: 0.9em;
     }
 
-    .today {
-      color: #27ae60;
-    }
+    .today { color: #27ae60; }
+    .total { color: #3498db; }
+    .profit { color: #e74c3c; }
+    .items { color: #f39c12; }
 
-    .total {
-      color: #3498db;
-    }
+    .content { padding: 30px; }
 
-    .profit {
-      color: #e74c3c;
-    }
-
-    .items {
-      color: #f39c12;
-    }
-
-    .content {
-      padding: 30px;
-    }
-
-    .section {
-      margin-bottom: 40px;
-    }
+    .section { margin-bottom: 40px; }
 
     .section h2 {
       color: #2c3e50;
@@ -129,8 +114,7 @@
       min-width: 800px;
     }
 
-    th,
-    td {
+    th, td {
       padding: 12px 15px;
       text-align: left;
       border-bottom: 1px solid #ecf0f1;
@@ -144,9 +128,7 @@
       top: 0;
     }
 
-    tr:hover {
-      background: #f8f9fa;
-    }
+    tr:hover { background: #f8f9fa; }
 
     .user-stats {
       display: grid;
@@ -176,25 +158,15 @@
       padding: 5px 0;
     }
 
-    .user-stat:last-child {
-      margin-bottom: 0;
-    }
-
-    .loading {
+    .loading, .error {
       text-align: center;
       padding: 50px;
-      color: #7f8c8d;
       font-size: 1.2em;
     }
 
-    .error {
-      text-align: center;
-      padding: 50px;
-      color: #e74c3c;
-      font-size: 1.2em;
-    }
+    .error { color: #e74c3c; }
 
-    .refresh-btn {
+    .refresh-btn, .load-more-btn {
       background: #3498db;
       color: white;
       border: none;
@@ -205,9 +177,13 @@
       transition: background 0.3s ease;
     }
 
-    .refresh-btn:hover {
-      background: #2980b9;
+    .load-more-btn {
+        display: block;
+        margin: 20px auto;
+        background: #2c3e50;
     }
+
+    .refresh-btn:hover { background: #2980b9; }
 
     .last-updated {
       text-align: center;
@@ -219,48 +195,7 @@
       border-radius: 5px;
     }
 
-    .currency {
-      font-weight: bold;
-    }
-
-    @media (max-width: 768px) {
-      .header h1 {
-        font-size: 2em;
-      }
-
-      .stats-grid {
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 15px;
-        padding: 20px;
-      }
-
-      .content {
-        padding: 20px;
-      }
-
-      .user-stats {
-        grid-template-columns: 1fr;
-      }
-
-      .controls-bar {
-        flex-direction: column;
-        align-items: stretch;
-      }
-
-      .date-filters {
-        flex-direction: column;
-        width: 100%;
-      }
-
-      .filter-group {
-        width: 100%;
-      }
-
-      .filter-group input,
-      .filter-group select {
-        width: 100%;
-      }
-    }
+    .currency { font-weight: bold; }
 
     .controls-bar {
       display: flex;
@@ -271,7 +206,7 @@
       flex-wrap: wrap;
     }
 
-    .date-filters {
+    .date-filters, .product-search {
       display: flex;
       gap: 15px;
       align-items: flex-end;
@@ -293,94 +228,16 @@
       font-weight: 600;
     }
 
-    .filter-group input,
-    .filter-group select {
+    .filter-group input, .filter-group select {
       padding: 8px 12px;
       border: 1px solid #bdc3c7;
       border-radius: 5px;
       font-family: inherit;
-      color: #2c3e50;
-      background: white;
     }
 
-    .filter-btn {
-      background: #27ae60;
-      color: white;
-      border: none;
-      padding: 8px 20px;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background 0.3s ease;
-      height: 38px;
-    }
-
-    .filter-btn:hover {
-      background: #2ecc71;
-    }
-
-    .reset-btn {
-      background: #95a5a6;
-      color: white;
-      border: none;
-      padding: 8px 20px;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background 0.3s ease;
-      height: 38px;
-    }
-
-    .reset-btn:hover {
-      background: #7f8c8d;
-    }
-
-    .product-search {
-      display: flex;
-      gap: 10px;
-      align-items: flex-end;
-      background: white;
-      padding: 15px;
-      border-radius: 10px;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-    }
-
-    .product-search input {
-      padding: 8px 12px;
-      border: 1px solid #bdc3c7;
-      border-radius: 5px;
-      font-family: inherit;
-      color: #2c3e50;
-      min-width: 240px;
-    }
-
-    .search-btn {
-      background: #8e44ad;
-      color: white;
-      border: none;
-      padding: 8px 20px;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background 0.3s ease;
-      height: 38px;
-    }
-
-    .search-btn:hover {
-      background: #9b59b6;
-    }
-
-    .clear-search-btn {
-      background: #95a5a6;
-      color: white;
-      border: none;
-      padding: 8px 20px;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background 0.3s ease;
-      height: 38px;
-    }
-
-    .clear-search-btn:hover {
-      background: #7f8c8d;
-    }
+    .filter-btn { background: #27ae60; color: white; border: none; padding: 8px 20px; border-radius: 5px; cursor: pointer; height: 38px;}
+    .reset-btn, .clear-search-btn { background: #95a5a6; color: white; border: none; padding: 8px 20px; border-radius: 5px; cursor: pointer; height: 38px;}
+    .search-btn { background: #8e44ad; color: white; border: none; padding: 8px 20px; border-radius: 5px; cursor: pointer; height: 38px;}
 
     .product-search-summary {
       margin-top: 20px;
@@ -391,15 +248,14 @@
       display: none;
     }
 
-    .product-search-summary h3 {
-      margin-bottom: 10px;
-      color: #2c3e50;
-    }
-
     .product-search-summary .row {
       display: flex;
       justify-content: space-between;
       padding: 6px 0;
+    }
+
+    @media (max-width: 768px) {
+      .date-filters, .product-search { flex-direction: column; width: 100%; align-items: stretch; }
     }
   </style>
 </head>
@@ -425,12 +281,12 @@
       <div class="stat-card">
         <h3>Total Sales</h3>
         <div class="value total" id="totalSales">PKR 0</div>
-        <div class="label" id="totalSalesLabel">Last 7 Days Revenue</div>
+        <div class="label" id="totalSalesLabel">Selected Period Revenue</div>
       </div>
       <div class="stat-card">
         <h3>Total Profit</h3>
         <div class="value profit" id="totalProfit">PKR 0</div>
-        <div class="label" id="totalProfitLabel">Last 7 Days Profit</div>
+        <div class="label" id="totalProfitLabel">Selected Period Profit</div>
       </div>
       <div class="stat-card">
         <h3>Items Sold</h3>
@@ -473,36 +329,20 @@
         <button class="refresh-btn" onclick="loadData()">🔄 Refresh Data</button>
       </div>
 
-      <div id="loadingMessage" class="loading">
-        Loading sales data...
-      </div>
-
-      <div id="errorMessage" class="error" style="display: none;">
-        Failed to load data. Please check your internet connection and try again.
-      </div>
+      <div id="loadingMessage" class="loading">Loading records...</div>
+      <div id="errorMessage" class="error" style="display: none;">Failed to load data.</div>
 
       <div id="mainContent" style="display: none;">
         <div class="product-search-summary" id="productSearchSummary">
           <h3 id="productSearchTitle">Product Summary</h3>
-          <div class="row">
-            <span>Total Sold</span>
-            <span id="productSearchSold">0</span>
-          </div>
-          <div class="row">
-            <span>Total Revenue</span>
-            <span class="currency" id="productSearchRevenue">PKR 0</span>
-          </div>
-          <div class="row">
-            <span>Total Profit</span>
-            <span class="currency" id="productSearchProfit">PKR 0</span>
-          </div>
+          <div class="row"><span>Total Sold</span><span id="productSearchSold">0</span></div>
+          <div class="row"><span>Total Revenue</span><span class="currency" id="productSearchRevenue">PKR 0</span></div>
+          <div class="row"><span>Total Profit</span><span class="currency" id="productSearchProfit">PKR 0</span></div>
         </div>
 
         <div class="section">
           <h2>👥 Sales by User</h2>
-          <div class="user-stats" id="userStats">
-            <!-- User statistics will be populated here -->
-          </div>
+          <div class="user-stats" id="userStats"></div>
         </div>
 
         <div class="section">
@@ -513,25 +353,24 @@
                 <tr>
                   <th>Date & Time</th>
                   <th>Product</th>
-                  <th>Quantity</th>
+                  <th>Qty</th>
                   <th>Unit Price</th>
-                  <th>Total Price</th>
+                  <th>Total</th>
                   <th>Profit</th>
                   <th>Sold By</th>
                   <th>Category</th>
                 </tr>
               </thead>
-              <tbody id="salesTableBody">
-                <!-- Sales records will be populated here -->
-              </tbody>
+              <tbody id="salesTableBody"></tbody>
             </table>
           </div>
+          <button id="loadMoreBtn" class="load-more-btn" onclick="loadMore()">Load More Records</button>
         </div>
 
         <div class="section">
-          <h2>🏆 Top Products</h2>
+          <h2>🏆 Top Products (By Revenue)</h2>
           <div class="table-container">
-            <table id="productsTable">
+            <table>
               <thead>
                 <tr>
                   <th>Product Name</th>
@@ -540,393 +379,228 @@
                   <th>Total Profit</th>
                 </tr>
               </thead>
-              <tbody id="productsTableBody">
-                <!-- Top products will be populated here -->
-              </tbody>
+              <tbody id="productsTableBody"></tbody>
             </table>
           </div>
         </div>
       </div>
 
-      <div class="last-updated" id="lastUpdated">
-        Last updated: Never
-      </div>
+      <div class="last-updated" id="lastUpdated">Last updated: Never</div>
     </div>
   </div>
 
   <script>
-    // Configuration - Update this with your Gist URL
     const GIST_URL = 'https://gist.githubusercontent.com/BalochTools123/024737ed4a3256a34186952908761b67/raw/sales.json';
-
-    // You can also use a local file for testing
-    // const GIST_URL = './sales_data.json';
 
     let salesData = null;
     let originalSalesRecords = [];
     let currentFilteredRecords = [];
+    let displayedRecords = [];
     let currentProductQuery = "";
+    let itemsPerPage = 100;
+    let currentPage = 1;
+
+    // Faster Currency Formatting
+    const pkrFormatter = new Intl.NumberFormat('en-PK', {
+        style: 'currency',
+        currency: 'PKR',
+        minimumFractionDigits: 0
+    });
+
+    function formatCurrency(amount) {
+        return pkrFormatter.format(amount || 0);
+    }
 
     function initDateFilters() {
       const today = new Date();
       const lastWeek = new Date(today);
       lastWeek.setDate(today.getDate() - 7);
-
       document.getElementById('endDate').valueAsDate = today;
       document.getElementById('startDate').valueAsDate = lastWeek;
-      document.getElementById('categoryFilter').value = "All";
     }
 
     function resetFilters() {
       initDateFilters();
+      document.getElementById('categoryFilter').value = "All";
       applyDateFilter();
     }
 
     function applyDateFilter() {
       if (!originalSalesRecords.length) return;
 
-      const startDate = new Date(document.getElementById('startDate').value);
-      const endDate = new Date(document.getElementById('endDate').value);
+      const startDate = new Date(document.getElementById('startDate').value).setHours(0,0,0,0);
+      const endDate = new Date(document.getElementById('endDate').value).setHours(23,59,59,999);
       const category = document.getElementById('categoryFilter').value;
 
-      // Set end date to end of day
-      endDate.setHours(23, 59, 59, 999);
-      startDate.setHours(0, 0, 0, 0);
-
-      const filteredRecords = originalSalesRecords.filter(record => {
-        const recordDate = new Date(record.sale_date);
-        const dateMatch = recordDate >= startDate && recordDate <= endDate;
-        const categoryMatch = category === "All" || record.category === category;
-        return dateMatch && categoryMatch;
+      // Filter logic optimized for speed
+      currentFilteredRecords = originalSalesRecords.filter(record => {
+        const rDate = new Date(record.sale_date).getTime();
+        return rDate >= startDate && rDate <= endDate && (category === "All" || record.category === category);
       });
 
-      currentFilteredRecords = filteredRecords;
-
-      // Calculate statistics for filtered data
-      const stats = calculateStats(filteredRecords);
-
-      // Update UI
-      updateStatistics(stats, true); // true indicates filtered mode
-      const productFilteredRecords = filterRecordsByProductQuery(filteredRecords, currentProductQuery);
-      updateSalesTable(productFilteredRecords);
-      updateTopProductsFromRecords(productFilteredRecords);
-      updateUserStatsFromRecords(productFilteredRecords);
-
-      updateProductSearchSummary(productFilteredRecords, currentProductQuery);
-    }
-
-    function filterRecordsByProductQuery(records, query) {
-      const q = (query || "").trim().toLowerCase();
-      if (!q) return records;
-      return records.filter(r => String(r.product_name || "").toLowerCase().includes(q));
+      renderDashboard();
     }
 
     function applyProductSearch() {
-      const input = document.getElementById('productSearchInput');
-      currentProductQuery = (input.value || "").trim();
-      applyDateFilter();
+      currentProductQuery = document.getElementById('productSearchInput').value.trim().toLowerCase();
+      renderDashboard();
     }
 
     function clearProductSearch() {
-      const input = document.getElementById('productSearchInput');
-      input.value = "";
+      document.getElementById('productSearchInput').value = "";
       currentProductQuery = "";
-      applyDateFilter();
+      renderDashboard();
     }
 
-    function updateProductSearchSummary(records, query) {
-      const summary = document.getElementById('productSearchSummary');
-      const title = document.getElementById('productSearchTitle');
-      const soldEl = document.getElementById('productSearchSold');
-      const revenueEl = document.getElementById('productSearchRevenue');
-      const profitEl = document.getElementById('productSearchProfit');
+    function renderDashboard() {
+      currentPage = 1; // Reset pagination
+      
+      // Secondary filter for search
+      let finalRecords = currentProductQuery 
+        ? currentFilteredRecords.filter(r => r.product_name.toLowerCase().includes(currentProductQuery))
+        : currentFilteredRecords;
 
-      const q = (query || "").trim();
-      if (!q) {
-        summary.style.display = 'none';
-        return;
-      }
+      displayedRecords = finalRecords;
 
-      let totalSold = 0;
-      let totalRevenue = 0;
-      let totalProfit = 0;
-
-      records.forEach(r => {
-        totalSold += Number(r.quantity || 0);
-        totalRevenue += Number(r.total_price || 0);
-        totalProfit += Number(r.profit || 0);
-      });
-
-      title.textContent = `Product Summary: ${q}`;
-      soldEl.textContent = totalSold.toLocaleString();
-      revenueEl.textContent = formatCurrency(totalRevenue);
-      profitEl.textContent = formatCurrency(totalProfit);
-      summary.style.display = 'block';
+      // Update Main Statistics
+      const stats = calculateStats(finalRecords);
+      updateStatistics(stats);
+      
+      // Update Specialized Sections
+      updateUserStats(finalRecords);
+      updateTopProducts(finalRecords);
+      updateProductSearchSummary(finalRecords);
+      
+      // Initial Table Load
+      refreshSalesTable();
     }
 
-    function updateUserStatsFromRecords(records) {
-      const userStats = {};
+    function refreshSalesTable() {
+      const tbody = document.getElementById('salesTableBody');
+      const loadMoreBtn = document.getElementById('loadMoreBtn');
+      const end = currentPage * itemsPerPage;
+      const slice = displayedRecords.slice(0, end);
 
-      records.forEach(record => {
-        const user = record.sold_by || 'Unknown';
-        if (!userStats[user]) {
-          userStats[user] = {
-            total_sales: 0,
-            total_profit: 0,
-            items_sold: 0,
-            today_sales: 0,
-            today_profit: 0
-          };
-        }
-        userStats[user].total_sales += record.total_price;
-        userStats[user].total_profit += record.profit;
-        userStats[user].items_sold += record.quantity;
-      });
+      // Using .join('') is significantly faster than createElement for large tables
+      tbody.innerHTML = slice.map(r => `
+        <tr>
+          <td>${new Date(r.sale_date).toLocaleString('en-PK')}</td>
+          <td>${r.product_name}</td>
+          <td>${r.quantity}</td>
+          <td>${formatCurrency(r.unit_price)}</td>
+          <td>${formatCurrency(r.total_price)}</td>
+          <td>${formatCurrency(r.profit)}</td>
+          <td>${r.sold_by}</td>
+          <td>${r.category || 'N/A'}</td>
+        </tr>
+      `).join('');
 
-      // Fill in "Today" stats from original data for context
-      if (salesData && salesData.statistics && salesData.statistics.user_stats) {
-        for (const [user, stats] of Object.entries(userStats)) {
-          if (salesData.statistics.user_stats[user]) {
-            stats.today_sales = salesData.statistics.user_stats[user].today_sales || 0;
-            stats.today_profit = salesData.statistics.user_stats[user].today_profit || 0;
-          }
-        }
-      }
+      loadMoreBtn.style.display = end >= displayedRecords.length ? 'none' : 'block';
+    }
 
-      updateUserStats(userStats, true);
+    function loadMore() {
+        currentPage++;
+        refreshSalesTable();
     }
 
     function calculateStats(records) {
-      let totalSales = 0;
-      let totalProfit = 0;
-      let itemsSold = 0;
+      let sales = 0, profit = 0, items = 0;
+      for(let i=0; i<records.length; i++) {
+          sales += records[i].total_price;
+          profit += records[i].profit;
+          items += records[i].quantity;
+      }
+      return { sales, profit, items };
+    }
 
-      records.forEach(record => {
-        totalSales += record.total_price;
-        totalProfit += record.profit;
-        itemsSold += record.quantity;
+    function updateStatistics(stats) {
+      document.getElementById('totalSales').textContent = formatCurrency(stats.sales);
+      document.getElementById('totalProfit').textContent = formatCurrency(stats.profit);
+      document.getElementById('todayItems').textContent = stats.items.toLocaleString();
+
+      if (salesData?.statistics) {
+        document.getElementById('todaySales').textContent = formatCurrency(salesData.statistics.today_sales);
+        document.getElementById('todayProfit').textContent = formatCurrency(salesData.statistics.today_profit);
+      }
+    }
+
+    function updateUserStats(records) {
+      const users = {};
+      records.forEach(r => {
+        if (!users[r.sold_by]) users[r.sold_by] = { s: 0, p: 0, i: 0 };
+        users[r.sold_by].s += r.total_price;
+        users[r.sold_by].p += r.profit;
+        users[r.sold_by].i += r.quantity;
       });
 
-      return {
-        total_sales: totalSales,
-        total_profit: totalProfit,
-        total_items_sold: itemsSold
-      };
-    }
-
-    function updateTopProductsFromRecords(records) {
-      const productStats = {};
-
-      records.forEach(record => {
-        const name = record.product_name;
-        if (!productStats[name]) {
-          productStats[name] = {
-            total_quantity: 0,
-            total_sales: 0,
-            total_profit: 0
-          };
-        }
-        productStats[name].total_quantity += record.quantity;
-        productStats[name].total_sales += record.total_price;
-        productStats[name].total_profit += record.profit;
-      });
-
-      updateTopProducts(productStats);
-    }
-
-    function formatCurrency(amount) {
-      return `PKR ${parseFloat(amount).toLocaleString('en-PK', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
-    }
-
-    function formatDate(dateString) {
-      const date = new Date(dateString);
-      return date.toLocaleString('en-PK', {
-        year: 'numeric',
-        month: 'short',
-        day: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit'
-      });
-    }
-
-    function showLoading() {
-      document.getElementById('loadingMessage').style.display = 'block';
-      document.getElementById('errorMessage').style.display = 'none';
-      document.getElementById('mainContent').style.display = 'none';
-    }
-
-    function showError() {
-      document.getElementById('loadingMessage').style.display = 'none';
-      document.getElementById('errorMessage').style.display = 'block';
-      document.getElementById('mainContent').style.display = 'none';
-    }
-
-    function showContent() {
-      document.getElementById('loadingMessage').style.display = 'none';
-      document.getElementById('errorMessage').style.display = 'none';
-      document.getElementById('mainContent').style.display = 'block';
-    }
-
-    function updateStatistics(stats, isFiltered = false) {
-      if (salesData && salesData.statistics) {
-        document.getElementById('todaySales').textContent = formatCurrency(salesData.statistics.today_sales || 0);
-        document.getElementById('todayProfit').textContent = formatCurrency(salesData.statistics.today_profit || 0);
-        document.getElementById('todayItems').textContent = (salesData.statistics.today_items_sold || 0).toLocaleString();
-      }
-
-      document.getElementById('totalSales').textContent = formatCurrency(stats.total_sales || 0);
-
-      if (document.getElementById('totalProfit')) {
-        document.getElementById('totalProfit').textContent = formatCurrency(stats.total_profit || 0);
-      }
-
-      if (document.getElementById('todayItems')) {
-        document.getElementById('todayItems').textContent = (stats.total_items_sold || 0).toLocaleString();
-      }
-
-      if (isFiltered) {
-        document.getElementById('totalSalesLabel').textContent = "Revenue (Selected)";
-        if (document.getElementById('totalProfitLabel')) {
-          document.getElementById('totalProfitLabel').textContent = "Profit (Selected)";
-        }
-        if (document.getElementById('itemsSoldLabel')) {
-          document.getElementById('itemsSoldLabel').textContent = "Products Sold (Selected)";
-        }
-      } else {
-        document.getElementById('totalSalesLabel').textContent = "All Time Revenue";
-        if (document.getElementById('totalProfitLabel')) {
-          document.getElementById('totalProfitLabel').textContent = "All Time Profit";
-        }
-        if (document.getElementById('itemsSoldLabel')) {
-          document.getElementById('itemsSoldLabel').textContent = "Products Sold (All Time)";
-        }
-      }
-    }
-
-    function updateUserStats(userStats, isFiltered = false) {
       const container = document.getElementById('userStats');
-      container.innerHTML = '';
-
-      const totalSalesLabel = isFiltered ? "Sales (Period):" : "Total Sales:";
-      const totalProfitLabel = isFiltered ? "Profit (Period):" : "Total Profit:";
-      const itemsSoldLabel = isFiltered ? "Items (Period):" : "Items Sold:";
-
-      for (const [username, stats] of Object.entries(userStats)) {
-        const userCard = document.createElement('div');
-        userCard.className = 'user-card';
-        userCard.innerHTML = `
-                    <h3>👤 ${username}</h3>
-                    <div class="user-stat">
-                        <span>Today's Sales:</span>
-                        <span class="currency">${formatCurrency(stats.today_sales || 0)}</span>
-                    </div>
-                    <div class="user-stat">
-                        <span>Today's Profit:</span>
-                        <span class="currency">${formatCurrency(stats.today_profit || 0)}</span>
-                    </div>
-                    <div class="user-stat">
-                        <span>${totalSalesLabel}</span>
-                        <span class="currency">${formatCurrency(stats.total_sales || 0)}</span>
-                    </div>
-                    <div class="user-stat">
-                        <span>${totalProfitLabel}</span>
-                        <span class="currency">${formatCurrency(stats.total_profit || 0)}</span>
-                    </div>
-                    <div class="user-stat">
-                        <span>${itemsSoldLabel}</span>
-                        <span>${(stats.items_sold || 0).toLocaleString()}</span>
-                    </div>
-                `;
-        container.appendChild(userCard);
-      }
+      container.innerHTML = Object.entries(users).map(([name, data]) => `
+        <div class="user-card">
+          <h3>👤 ${name}</h3>
+          <div class="user-stat"><span>Sales:</span><span class="currency">${formatCurrency(data.s)}</span></div>
+          <div class="user-stat"><span>Profit:</span><span class="currency">${formatCurrency(data.p)}</span></div>
+          <div class="user-stat"><span>Items:</span><span>${data.i.toLocaleString()}</span></div>
+        </div>
+      `).join('');
     }
 
-    function updateSalesTable(salesRecords) {
-      const tbody = document.getElementById('salesTableBody');
-      tbody.innerHTML = '';
-
-      salesRecords.forEach(record => {
-        const row = document.createElement('tr');
-        row.innerHTML = `
-                    <td>${formatDate(record.sale_date)}</td>
-                    <td>${record.product_name}</td>
-                    <td>${record.quantity}</td>
-                    <td>${formatCurrency(record.unit_price)}</td>
-                    <td>${formatCurrency(record.total_price)}</td>
-                    <td>${formatCurrency(record.profit)}</td>
-                    <td>${record.sold_by}</td>
-                    <td>${record.category || 'N/A'}</td>
-                `;
-        tbody.appendChild(row);
+    function updateTopProducts(records) {
+      const products = {};
+      records.forEach(r => {
+        if (!products[r.product_name]) products[r.product_name] = { q: 0, s: 0, p: 0 };
+        products[r.product_name].q += r.quantity;
+        products[r.product_name].s += r.total_price;
+        products[r.product_name].p += r.profit;
       });
+
+      const sorted = Object.entries(products).sort((a,b) => b[1].s - a[1].s).slice(0, 15);
+      document.getElementById('productsTableBody').innerHTML = sorted.map(([name, data]) => `
+        <tr>
+          <td>${name}</td>
+          <td>${data.q}</td>
+          <td>${formatCurrency(data.s)}</td>
+          <td>${formatCurrency(data.p)}</td>
+        </tr>
+      `).join('');
     }
 
-    function updateTopProducts(topProducts) {
-      const tbody = document.getElementById('productsTableBody');
-      tbody.innerHTML = '';
+    function updateProductSearchSummary(records) {
+      const summary = document.getElementById('productSearchSummary');
+      if (!currentProductQuery) { summary.style.display = 'none'; return; }
 
-      const topProductsArray = Object.entries(topProducts).slice(0, 20);
-
-      topProductsArray.forEach(([productName, stats]) => {
-        const row = document.createElement('tr');
-        row.innerHTML = `
-                    <td>${productName}</td>
-                    <td>${stats.total_quantity}</td>
-                    <td>${formatCurrency(stats.total_sales)}</td>
-                    <td>${formatCurrency(stats.total_profit)}</td>
-                `;
-        tbody.appendChild(row);
-      });
-    }
-
-    function updateLastUpdated(timestamp) {
-      document.getElementById('lastUpdated').textContent = `Last updated: ${formatDate(timestamp)}`;
+      const stats = calculateStats(records);
+      document.getElementById('productSearchTitle').textContent = `Results for: "${currentProductQuery}"`;
+      document.getElementById('productSearchSold').textContent = stats.items.toLocaleString();
+      document.getElementById('productSearchRevenue').textContent = formatCurrency(stats.sales);
+      document.getElementById('productSearchProfit').textContent = formatCurrency(stats.profit);
+      summary.style.display = 'block';
     }
 
     async function loadData() {
-      showLoading();
+      document.getElementById('loadingMessage').style.display = 'block';
+      document.getElementById('mainContent').style.display = 'none';
 
       try {
-        const url = GIST_URL + '?t=' + new Date().getTime();
-        const response = await fetch(url);
-
-        if (!response.ok) {
-          throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-        }
-
+        const response = await fetch(`${GIST_URL}?t=${Date.now()}`);
         salesData = await response.json();
-        originalSalesRecords = salesData.sales_records || [];
-        currentFilteredRecords = originalSalesRecords;
-
-        if (!document.getElementById('startDate').value) {
-          initDateFilters();
-        }
-
+        originalSalesRecords = (salesData.sales_records || []).sort((a, b) => new Date(b.sale_date) - new Date(a.sale_date));
+        
+        if (!document.getElementById('startDate').value) initDateFilters();
+        
         applyDateFilter();
-        updateLastUpdated(salesData.statistics.last_updated || new Date().toISOString());
-
-        showContent();
-
-      } catch (error) {
-        console.error('Error loading data:', error);
-        showError();
+        document.getElementById('lastUpdated').textContent = `Last updated: ${new Date().toLocaleString('en-PK')}`;
+        
+        document.getElementById('loadingMessage').style.display = 'none';
+        document.getElementById('mainContent').style.display = 'block';
+      } catch (e) {
+        document.getElementById('loadingMessage').style.display = 'none';
+        document.getElementById('errorMessage').style.display = 'block';
       }
     }
 
-    function startAutoRefresh() {
-      setInterval(loadData, 5 * 60 * 1000); // 5 minutes
-    }
-
-    document.addEventListener('DOMContentLoaded', function () {
-      loadData();
-      startAutoRefresh();
-    });
-
-    document.addEventListener('visibilitychange', function () {
-      if (!document.hidden) {
-        loadData();
-      }
-    });
+    document.addEventListener('DOMContentLoaded', loadData);
+    // Refresh when user returns to tab
+    document.addEventListener('visibilitychange', () => { if (!document.hidden) loadData(); });
   </script>
 </body>
-
 </html>

@@ -291,7 +291,7 @@
       <div class="stat-card">
         <h3>Items Sold</h3>
         <div class="value items" id="todayItems">0</div>
-        <div class="label" id="itemsSoldLabel">Products Sold (Period)</div>
+        <div class="label" id="itemsSoldLabel">Products Sold (Today)</div>
       </div>
     </div>
 
@@ -400,7 +400,6 @@
     let itemsPerPage = 100;
     let currentPage = 1;
 
-    // Faster Currency Formatting
     const pkrFormatter = new Intl.NumberFormat('en-PK', {
         style: 'currency',
         currency: 'PKR',
@@ -432,7 +431,6 @@
       const endDate = new Date(document.getElementById('endDate').value).setHours(23,59,59,999);
       const category = document.getElementById('categoryFilter').value;
 
-      // Filter logic optimized for speed
       currentFilteredRecords = originalSalesRecords.filter(record => {
         const rDate = new Date(record.sale_date).getTime();
         return rDate >= startDate && rDate <= endDate && (category === "All" || record.category === category);
@@ -453,25 +451,19 @@
     }
 
     function renderDashboard() {
-      currentPage = 1; // Reset pagination
+      currentPage = 1; 
       
-      // Secondary filter for search
       let finalRecords = currentProductQuery 
         ? currentFilteredRecords.filter(r => r.product_name.toLowerCase().includes(currentProductQuery))
         : currentFilteredRecords;
 
       displayedRecords = finalRecords;
 
-      // Update Main Statistics
       const stats = calculateStats(finalRecords);
       updateStatistics(stats);
-      
-      // Update Specialized Sections
       updateUserStats(finalRecords);
       updateTopProducts(finalRecords);
       updateProductSearchSummary(finalRecords);
-      
-      // Initial Table Load
       refreshSalesTable();
     }
 
@@ -481,7 +473,6 @@
       const end = currentPage * itemsPerPage;
       const slice = displayedRecords.slice(0, end);
 
-      // Using .join('') is significantly faster than createElement for large tables
       tbody.innerHTML = slice.map(r => `
         <tr>
           <td>${new Date(r.sale_date).toLocaleString('en-PK')}</td>
@@ -506,22 +497,40 @@
     function calculateStats(records) {
       let sales = 0, profit = 0, items = 0;
       for(let i=0; i<records.length; i++) {
-          sales += records[i].total_price;
-          profit += records[i].profit;
-          items += records[i].quantity;
+          sales += (records[i].total_price || 0);
+          profit += (records[i].profit || 0);
+          items += (records[i].quantity || 0);
       }
       return { sales, profit, items };
     }
 
     function updateStatistics(stats) {
+      // 1. Get Local "Today" in YYYY-MM-DD format
+      const todayStr = new Date().toISOString().split('T')[0]; 
+
+      let liveTodaySales = 0;
+      let liveTodayProfit = 0;
+      let liveTodayItems = 0;
+
+      // 2. Scan ALL records for Today's date
+      originalSalesRecords.forEach(r => {
+        // Extract only the date part "2026-05-14" from "2026-05-14 21:10:08"
+        const recordDate = r.sale_date.split(' ')[0]; 
+        if (recordDate === todayStr) {
+          liveTodaySales += (r.total_price || 0);
+          liveTodayProfit += (r.profit || 0);
+          liveTodayItems += (r.quantity || 0);
+        }
+      });
+
+      // 3. Update Today Badges
+      document.getElementById('todaySales').textContent = formatCurrency(liveTodaySales);
+      document.getElementById('todayProfit').textContent = formatCurrency(liveTodayProfit);
+      document.getElementById('todayItems').textContent = liveTodayItems.toLocaleString();
+
+      // 4. Update Period/Filter Badges
       document.getElementById('totalSales').textContent = formatCurrency(stats.sales);
       document.getElementById('totalProfit').textContent = formatCurrency(stats.profit);
-      document.getElementById('todayItems').textContent = stats.items.toLocaleString();
-
-      if (salesData?.statistics) {
-        document.getElementById('todaySales').textContent = formatCurrency(salesData.statistics.today_sales);
-        document.getElementById('todayProfit').textContent = formatCurrency(salesData.statistics.today_profit);
-      }
     }
 
     function updateUserStats(records) {
@@ -599,7 +608,6 @@
     }
 
     document.addEventListener('DOMContentLoaded', loadData);
-    // Refresh when user returns to tab
     document.addEventListener('visibilitychange', () => { if (!document.hidden) loadData(); });
   </script>
 </body>
